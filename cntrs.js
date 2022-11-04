@@ -6,7 +6,8 @@ const checkTaskAndAddComment = async (req, res, next) => {
     const data = req.body;
     const allKeys = await getNameProjects();
     const message = data.event.text;
-    const arrWords = message.split(" ");
+    const arrWords = message.replace(/[\.,%]/g, '').trim().split(" ");
+    console.log(arrWords);
 
     for (key of allKeys) {
       const tasks = arrWords.filter((word) => word.includes(key));
